@@ -14,7 +14,7 @@ namespace MedicneOrder
 {
     public partial class LoginForm : Form
     {
-        String ordb = "Data Source =ORCL ; User Id=scott; Password=tiger";
+        String ordb = "Data Source =ORCL ; User Id=hr; Password=hr";
         OracleConnection conn;
         public LoginForm()
         {

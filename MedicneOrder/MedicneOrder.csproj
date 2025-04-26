@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminUserManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminUserManagementForm.Designer.cs">
+      <DependentUpon>AdminUserManagementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllMedicinesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     <Compile Include="ViewOrderHistoryForm.Designer.cs">
       <DependentUpon>ViewOrderHistoryForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminUserManagementForm.resx">
+      <DependentUpon>AdminUserManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AllMedicinesForm.resx">
       <DependentUpon>AllMedicinesForm.cs</DependentUpon>
     </EmbeddedResource>
