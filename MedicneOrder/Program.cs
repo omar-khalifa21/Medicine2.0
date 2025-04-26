@@ -16,7 +16,7 @@ namespace MedicneOrder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AdminUserManagementForm());
+            Application.Run(new InsertOrderForm());
         }
     }
 }
