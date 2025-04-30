@@ -59,9 +59,9 @@ namespace MedicneOrder
                     switch (userType)
                     {
                         case "Customer":
-                            MessageBox.Show("logged into cust");
-                            //logic form bta3 custwh
-                            //open form cust
+                            User user = new User(userId); //3shan el userid
+                            user.Show();
+                            this.Hide(); // Hide the login form//ya rab yshta8al
                             break;
                         case "Pharmacist":
                             // logic form bta3 pharm

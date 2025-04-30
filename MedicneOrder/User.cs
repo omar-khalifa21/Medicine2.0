@@ -1,24 +1,44 @@
 ﻿using Oracle.DataAccess.Client;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.DataAccess.Types;
 
 namespace MedicneOrder
 {
-    public partial class Form1 : Form
+    public partial class User : Form
     {
         private int userId;
         private string ordb = "Data Source=ORCL;User Id=scott;Password=tiger";
         private OracleConnection conn;
-
-        public Form1(int userId)
+        public User()
         {
             InitializeComponent();
             this.userId = userId;
             conn = new OracleConnection(ordb);
             LoadAllData();
         }
+        //3shan na5od user id 3altool
+        public User(int userId)
+        {
+            this.userId = userId;
+        }
 
+        private void User_Load(object sender, EventArgs e)
+        {
+     
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         private void LoadAllData()
         {
             try
@@ -38,7 +58,7 @@ namespace MedicneOrder
                         textBox2.Text = userReader["UserID"].ToString();
                     }
                 }
-
+                
                 // 2. Load order history into dataGridView1
                 string ordersQuery = @"SELECT OrderID, OrderDate, TotalAmount, Status 
                                     FROM Orders 
@@ -58,6 +78,7 @@ namespace MedicneOrder
                 dataGridView1.Columns["OrderDate"].HeaderText = "Date";
                 dataGridView1.Columns["TotalAmount"].HeaderText = "Amount";
                 dataGridView1.Columns["Status"].HeaderText = "Status";
+           
             }
             catch (Exception ex)
             {
@@ -65,14 +86,22 @@ namespace MedicneOrder
             }
             finally
             {
-                if (conn.State == ConnectionState.Open)
-                    conn.Close();
+               // if (conn.State == ConnectionState.Open)
+                 //   conn.Close();
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+     
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             this.Close(); // Logout
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
+
 }
