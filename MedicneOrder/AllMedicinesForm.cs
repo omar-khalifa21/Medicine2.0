@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.DataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,9 @@ namespace MedicneOrder
 {
     public partial class AllMedicinesForm : Form
     {
+
+        string ordb = "Data Source =orcl ; User Id=HR; Password=hr";
+        OracleConnection conn;
         public AllMedicinesForm()
         {
             InitializeComponent();

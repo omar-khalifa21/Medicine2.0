@@ -15,9 +15,10 @@ namespace MedicneOrder
 {
     public partial class AdminUserManagementForm : Form
     {
+
         string ordb = "Data Source =orcl ; User Id=HR; Password=hr";
         OracleConnection conn;
-       
+
         public AdminUserManagementForm()
         {
             InitializeComponent();
@@ -49,13 +50,15 @@ namespace MedicneOrder
                 c.Connection = conn;
 
                 // Fix the SQL statement: Removing extra comma
-                c.CommandText = "UPDATE Users SET Username = :name, Email = :email, Phone = :number WHERE UserID = :id";
+                c.CommandText = "UPDATE Users SET Username = :name, Email = :email, Phone = :number , Password = :pass , UserType = :type WHERE UserID = :id";
                 c.CommandType = CommandType.Text;
 
                 // Adding parameters with correct data types
                 c.Parameters.Add("name", OracleDbType.Varchar2).Value = textBox1.Text; // Username
                 c.Parameters.Add("email", OracleDbType.Varchar2).Value = textBox2.Text; // Email
                 c.Parameters.Add("number", OracleDbType.Varchar2).Value = textBox3.Text; // Phone
+                c.Parameters.Add("pass",OracleDbType.Varchar2).Value= textBox5.Text;
+                c.Parameters.Add("type", OracleDbType.Varchar2).Value = textBox4.Text;
                 c.Parameters.Add("id", OracleDbType.Int32).Value = Convert.ToInt32(comboBox1.SelectedItem.ToString()); // UserID
 
                 // Execute the query
@@ -102,8 +105,11 @@ namespace MedicneOrder
 
                     // Clear the form controls after successful deletion
                    textBox1.Text = "";
-                    textBox2.Text = "";
-                    textBox3.Text = "";
+                   textBox2.Text = "";
+                   textBox3.Text = "";
+                   textBox4.Text = "";
+                   textBox5.Text = "";
+
                 }
                 else
                 {
@@ -122,7 +128,7 @@ namespace MedicneOrder
 
             OracleCommand c = new OracleCommand();
             c.Connection = conn;
-            c.CommandText = "select Username , Email,  Phone  from Users where UserID =:id ";
+            c.CommandText = "select Username , Email,  Phone , UserType , Password  from Users where UserID =:id ";
             c.CommandType = CommandType.Text;
             c.Parameters.Add("id", comboBox1.SelectedItem.ToString());
             OracleDataReader r = c.ExecuteReader();
@@ -131,10 +137,35 @@ namespace MedicneOrder
                 textBox1.Text = r[0].ToString();
                 textBox2.Text = r[1].ToString(); 
                 textBox3.Text = r[2].ToString();
+                textBox4.Text = r[3].ToString();
+                textBox5.Text = r[4].ToString();
                 
             
             }
 
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            OracleCommand c = new OracleCommand();
+            c.Connection = conn;
+            c.CommandText = "Insert into Users values (:Userid , :name , :pass, :email, :phone, :usertype)";
+            c.CommandType = CommandType.Text;
+            c.Parameters.Add("Userid", comboBox1.Text);
+            c.Parameters.Add("Userid", textBox1.Text);
+            c.Parameters.Add("Userid", textBox5.Text);
+            c.Parameters.Add("Userid", textBox2.Text);
+            c.Parameters.Add("Userid", textBox3.Text);
+            c.Parameters.Add("Userid", textBox4.Text);
+
+            int r  = c.ExecuteNonQuery();
+            if (r != -1)
+            {
+                comboBox1.Items.Add(comboBox1.Text);
+                MessageBox.Show("User added!!");
+            }
 
         }
     }
