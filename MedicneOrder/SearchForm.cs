@@ -51,22 +51,41 @@ namespace MedicneOrder
         private void button1_Click(object sender, EventArgs e)
         {
 
-            OracleCommand c = new OracleCommand();
-            c.Connection = conn;
-            c.CommandText = "SELECT Name ,Description, Price  ,StockQuantity, Category from Medicines WHERE MEDICINEID  =:id ";
-            c.CommandType = CommandType.Text;
-            c.Parameters.Add("id", comboBox1.SelectedItem.ToString());
-            OracleDataReader r = c.ExecuteReader();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "GetMedicineByID";
+            cmd.CommandType = CommandType.StoredProcedure;
 
-            if (r.Read())
+            // Input parameter
+            cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = int.Parse(comboBox1.SelectedItem.ToString());
+
+            // Output parameters
+            cmd.Parameters.Add("p_name", OracleDbType.Varchar2, 100).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("p_description", OracleDbType.Varchar2, 200).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("p_price", OracleDbType.Decimal).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("p_stock", OracleDbType.Int32).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("p_category", OracleDbType.Varchar2, 50).Direction = ParameterDirection.Output;
+
+            try
             {
-                textBox1.Text = r[0].ToString();
-                textBox5.Text = r[1].ToString();
-                textBox4.Text = r[2].ToString();
-                textBox3.Text = r[2].ToString();
-                textBox2.Text = r[2].ToString();
+                cmd.ExecuteNonQuery();
 
-
+                if (cmd.Parameters["p_name"].Value != DBNull.Value)
+                {
+                    textBox1.Text = cmd.Parameters["p_name"].Value.ToString();
+                    textBox5.Text = cmd.Parameters["p_description"].Value.ToString();
+                    textBox4.Text = cmd.Parameters["p_price"].Value.ToString();
+                    textBox3.Text = cmd.Parameters["p_stock"].Value.ToString();
+                    textBox2.Text = cmd.Parameters["p_category"].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("No medicine found for the selected ID.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
 
         }
