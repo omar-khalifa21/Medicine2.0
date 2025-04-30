@@ -154,6 +154,9 @@
     <EmbeddedResource Include="PrescriptionUploadForm.resx">
       <DependentUpon>PrescriptionUploadForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrescriptionVerficationForm.resx">
+      <DependentUpon>PrescriptionVerficationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>

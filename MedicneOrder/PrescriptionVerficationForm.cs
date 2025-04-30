@@ -9,92 +9,83 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Oracle.ManagedDataAccess.Client;
+using System.Data.Odbc;
+using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Types;
 
 namespace MedicneOrder
 {
     public partial class PrescriptionVerificationForm : Form
     {
-        private SqlDataAdapter dataAdapter;
-        private DataSet dataSet;
-        private string connectionString = "YOUR_CONNECTION_STRING";
+        OracleConnection conn;
+        OracleDataAdapter adapter;
+        DataSet dataset;
+        OracleCommandBuilder builder;
 
         public PrescriptionVerificationForm()
         {
             InitializeComponent();
-        }
-
-        private void PrescriptionVerificationForm_Load(object sender, EventArgs e)
-        {
+            conn = DBConnection.GetConnection(); // Assumes you have the same DBConnection helper
             LoadPrescriptions();
+            cmbStatus.Items.AddRange(new string[] { "Pending", "Approved", "Rejected" });
         }
 
         private void LoadPrescriptions()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                dataAdapter = new SqlDataAdapter("SELECT * FROM Prescriptions", connection);
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-
-                dataSet = new DataSet();
-                dataAdapter.Fill(dataSet, "Prescriptions");
-
-                dgvPrescriptions.DataSource = dataSet.Tables["Prescriptions"];
-            }
-        }
-
-        private void btnApprove_Click(object sender, EventArgs e)
-        {
-            if (dgvPrescriptions.SelectedRows.Count > 0)
-            {
-                foreach (DataGridViewRow row in dgvPrescriptions.SelectedRows)
-                {
-                    row.Cells["Status"].Value = "Approved";
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a prescription to approve.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void btnReject_Click(object sender, EventArgs e)
-        {
-            if (dgvPrescriptions.SelectedRows.Count > 0)
-            {
-                foreach (DataGridViewRow row in dgvPrescriptions.SelectedRows)
-                {
-                    row.Cells["Status"].Value = "Rejected";
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a prescription to reject.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void btnSaveChanges_Click(object sender, EventArgs e)
-        {
             try
             {
-                dataAdapter.Update(dataSet, "Prescriptions");
-                MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadPrescriptions();
+                string query = "SELECT PrescriptionID, UserID, UploadDate, PatientName, MedicineName, Dosage, Status FROM Prescriptions";
+                adapter = new OracleDataAdapter(query, conn);
+                builder = new OracleCommandBuilder(adapter);
+                dataset = new DataSet();
+                adapter.Fill(dataset, "Prescriptions");
+                dgvPrescriptions.DataSource = dataset.Tables["Prescriptions"];
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error saving changes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error loading data: " + ex.Message);
             }
         }
 
-        private void btnReload_Click(object sender, EventArgs e)
+        private void dgvPrescriptions_SelectionChanged(object sender, EventArgs e)
         {
-            LoadPrescriptions();
+            if (dgvPrescriptions.SelectedRows.Count > 0)
+            {
+                string status = dgvPrescriptions.SelectedRows[0].Cells["Status"].Value.ToString();
+                cmbStatus.SelectedItem = status;
+            }
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnUpdateStatus_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (dgvPrescriptions.SelectedRows.Count == 0 || cmbStatus.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a row and a status.");
+                return;
+            }
+
+            string selectedPrescriptionID = dgvPrescriptions.SelectedRows[0].Cells["PrescriptionID"].Value.ToString();
+            string newStatus = cmbStatus.SelectedItem.ToString();
+
+            foreach (DataRow row in dataset.Tables["Prescriptions"].Rows)
+            {
+                if (row["PrescriptionID"].ToString() == selectedPrescriptionID)
+                {
+                    row["Status"] = newStatus;
+                    break;
+                }
+            }
+
+            try
+            {
+                adapter.Update(dataset, "Prescriptions");
+                MessageBox.Show("Status updated successfully.");
+                LoadPrescriptions(); // Refresh data
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating status: " + ex.Message);
+            }
         }
     }
 }
