@@ -21,8 +21,8 @@ namespace MedicneOrder
         {
             AllMedicinesForm medform = new AllMedicinesForm();
             LoginForm login = new LoginForm();  // Create instance
-            login.Show();  // Show the form non-modally
-            medform.Hide();  // Optional: hide the login form
+ login.Show();  
+
         }
     }
 }

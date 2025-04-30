@@ -14,7 +14,7 @@ namespace MedicneOrder
 {
     public partial class LoginForm : Form
     {
-        String ordb = "Data Source =ORCL ; User Id=hr; Password=hr";
+        String ordb = "Data Source =ORCL ; User Id=scott; Password=tiger";
         OracleConnection conn;
         public LoginForm()
         {
@@ -67,7 +67,9 @@ namespace MedicneOrder
                             // logic form bta3 pharm
                             break;
                         case "Admin":
-                            //logic form bta3 admin
+                            AdminUserManagementForm adminUserManagementForm = new AdminUserManagementForm();
+                            adminUserManagementForm.Show();
+
                             break;
                         default:
                             MessageBox.Show("Unknown user type");

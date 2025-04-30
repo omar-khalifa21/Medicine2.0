@@ -74,6 +74,12 @@
     <Compile Include="DisconnectedUpdateForm.Designer.cs">
       <DependentUpon>DisconnectedUpdateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="user form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="user form.Designer.cs">
+      <DependentUpon>user form.cs</DependentUpon>
+    </Compile>
     <Compile Include="InsertOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="user form.resx">
+      <DependentUpon>user form.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
