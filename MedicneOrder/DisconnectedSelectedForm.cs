@@ -16,40 +16,60 @@ namespace MedicneOrder
 {
     public partial class DisconnectedSelectedForm : Form
     {
-        private SqlDataAdapter dataAdapter;
-        private DataSet dataSet;
-        private string connectionString = "YOUR_CONNECTION_STRING";
+        OracleConnection conn;
+        OracleDataAdapter adapter;
+        DataSet dataset;
 
         public DisconnectedSelectedForm()
         {
             InitializeComponent();
+            conn = DBConnection.GetConnection(); // Use the connection helper class
         }
 
-        private void DisconnectedSelectedForm_Load(object sender, EventArgs e)
+        private void DisconnectedSelectForm_Load(object sender, EventArgs e)
         {
-            LoadMedicines();
+            // Load filter options into the combo box
+            cmbFilter.Items.Add("Name");
+            cmbFilter.Items.Add("Category");
+            cmbFilter.SelectedIndex = 0;
         }
 
-        private void LoadMedicines()
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                dataAdapter = new SqlDataAdapter("SELECT MedicineID, Name, Price, StockQuantity FROM Medicines", connection);
-                dataSet = new DataSet();
-                dataAdapter.Fill(dataSet, "Medicines");
+                string searchTerm = txtSearch.Text.Trim();
 
-                dgvSelectedMedicines.DataSource = dataSet.Tables["Medicines"];
+                if (string.IsNullOrWhiteSpace(searchTerm))
+                {
+                    MessageBox.Show("Please enter a search term.");
+                    return;
+                }
+
+                string selectedFilter = cmbFilter.SelectedItem.ToString();
+                string query = "";
+
+                if (selectedFilter == "Name")
+                {
+                    query = "SELECT MedicineID, MedicineName, Category, Price, QuantityInStock FROM Medicines WHERE LOWER(MedicineName) LIKE :searchTerm";
+                }
+                else if (selectedFilter == "Category")
+                {
+                    query = "SELECT MedicineID, MedicineName, Category, Price, QuantityInStock FROM Medicines WHERE LOWER(Category) LIKE :searchTerm";
+                }
+
+                adapter = new OracleDataAdapter(query, conn);
+                adapter.SelectCommand.Parameters.Add("searchTerm", "%" + searchTerm.ToLower() + "%");
+
+                dataset = new DataSet();
+                adapter.Fill(dataset);
+
+                dgvResults.DataSource = dataset.Tables[0];
             }
-        }
-
-        private void btnReload_Click(object sender, EventArgs e)
-        {
-            LoadMedicines();
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
     }
 }
