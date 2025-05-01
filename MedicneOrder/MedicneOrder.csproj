@@ -104,7 +104,9 @@
     <Compile Include="MedicineDetailsForm.Designer.cs">
       <DependentUpon>MedicineDetailsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PrescriptionUploadForm.cs" />
+    <Compile Include="PrescriptionUploadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PrescriptionUploadForm.Designer.cs">
       <DependentUpon>PrescriptionUploadForm.cs</DependentUpon>
     </Compile>
