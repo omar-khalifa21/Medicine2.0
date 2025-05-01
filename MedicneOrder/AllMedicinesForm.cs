@@ -23,48 +23,10 @@ namespace MedicneOrder
 
         private void AllMedicinesForm_Load(object sender, EventArgs e)
         {
-            conn = new OracleConnection(ordb);
-            conn.Open();
-            OracleCommand cmd = new OracleCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = "GetInventory";
-            cmd.CommandType = CommandType.StoredProcedure;
+            AllMedicinesForm medform = new AllMedicinesForm();
+            LoginForm login = new LoginForm();  // Create instance
+ login.Show();  
 
-            cmd.Parameters.Add("result_cursor", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
-
-            try
-            {
-                OracleDataReader reader = cmd.ExecuteReader();
-
-                // Clear and setup DataGridView
-                dataGridView1.Rows.Clear();
-                dataGridView1.Columns.Clear();
-
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    dataGridView1.Columns.Add(reader.GetName(i), reader.GetName(i));
-                }
-
-                while (reader.Read())
-                {
-                    object[] row = new object[reader.FieldCount];
-                    reader.GetValues(row);
-                    dataGridView1.Rows.Add(row);
-                }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading inventory: " + ex.Message);
-            }
-        
-    }
-
-        private void AllMedicinesForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (conn != null && conn.State == ConnectionState.Open)
-                conn.Close();
         }
     }
 }
