@@ -151,6 +151,9 @@
     <EmbeddedResource Include="DisconnectedSelectedForm.resx">
       <DependentUpon>DisconnectedSelectedForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InsertOrderForm.resx">
+      <DependentUpon>InsertOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MedicineDetailsForm.resx">
       <DependentUpon>MedicineDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
