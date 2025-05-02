@@ -14,7 +14,7 @@ namespace MedicneOrder
 {
     public partial class Mainform : Form
     {
-        private int userId;
+        private int userId=1;
         private string ordb = "Data Source=ORCL;User Id=scott;Password=tiger";
         private OracleConnection conn;
         public Mainform()
@@ -108,6 +108,12 @@ namespace MedicneOrder
             SearchForm searchForm = new SearchForm();
             searchForm.Show();
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            InsertOrderForm insertForm = new InsertOrderForm(); 
+            insertForm.Show();
         }
     }
 
