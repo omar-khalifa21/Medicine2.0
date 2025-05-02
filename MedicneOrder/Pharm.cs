@@ -31,6 +31,10 @@ namespace MedicneOrder
             c.CommandText = "select inventoryid from inventory";
             c.CommandType = CommandType.Text;
             OracleDataReader r = c.ExecuteReader();
+            while (r.Read())
+            {
+                comboBox1.Items.Add(r["inventoryid"].ToString()); // ✅ Add each inventory ID to combo
+            }
 
         }
 
@@ -49,13 +53,25 @@ namespace MedicneOrder
                 if (reader.Read())
                 {
                     textBox2.Text = reader["MEDICINEID"].ToString();
-                    textBox2.Text = Convert.ToDateTime(reader["LASTUPDATED"]).ToString("yyyy-MM-dd");
-                    textBox3.Text = reader["QUANTITY"].ToString();
+                    textBox3.Text = Convert.ToDateTime(reader["LASTUPDATED"]).ToString("yyyy-MM-dd");
+                    textBox4.Text = reader["QUANTITY"].ToString();
                 }
 
                // conn.Close();
 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PrescriptionUploadForm form = new PrescriptionUploadForm();
+            form.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PrescriptionVerificationForm form = new PrescriptionVerificationForm(); 
+                form.Show();
         }
     }
 }

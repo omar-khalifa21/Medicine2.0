@@ -17,6 +17,7 @@ namespace MedicneOrder
 {
     public partial class PrescriptionVerificationForm : Form
     {
+        String ordb = "Data Source =ORCL ; User Id=scott; Password=tiger";
         OracleConnection conn;
         OracleDataAdapter adapter;
         DataSet dataset;
@@ -25,7 +26,8 @@ namespace MedicneOrder
         public PrescriptionVerificationForm()
         {
             InitializeComponent();
-            conn = DBConnection.GetConnection(); // Assumes you have the same DBConnection helper
+            conn = new OracleConnection(ordb);
+            conn.Open(); // Assumes you have the same DBConnection helper
             LoadPrescriptions();
             cmbStatus.Items.AddRange(new string[] { "Pending", "Approved", "Rejected" });
         }

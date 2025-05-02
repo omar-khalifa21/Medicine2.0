@@ -19,11 +19,13 @@ namespace MedicneOrder
         OracleConnection conn;
         OracleDataAdapter adapter;
         DataSet dataset;
+        String ordb = "Data Source =ORCL ; User Id=scott; Password=tiger";
 
         public DisconnectedSelectedForm()
         {
             InitializeComponent();
-            conn = DBConnection.GetConnection(); // Use the connection helper class
+            conn = new OracleConnection(ordb);
+            conn.Open(); 
         }
 
         private void DisconnectedSelectForm_Load(object sender, EventArgs e)

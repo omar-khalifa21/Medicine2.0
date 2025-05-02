@@ -19,6 +19,8 @@ namespace MedicneOrder
 {
     public partial class PrescriptionUploadForm : Form
     {
+        String ordb = "Data Source =ORCL ; User Id=scott; Password=tiger";
+
         OracleConnection conn;
         OracleDataAdapter adapter;
         DataSet dataset;
@@ -27,7 +29,8 @@ namespace MedicneOrder
         public PrescriptionUploadForm()
         {
             InitializeComponent();
-            conn = DBConnection.GetConnection(); // Your DB connection method
+            conn = new OracleConnection(ordb);
+            conn.Open(); // Your DB connection method
         }
 
         private void btnUpload_Click(object sender, EventArgs e)

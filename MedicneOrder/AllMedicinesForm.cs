@@ -14,7 +14,7 @@ namespace MedicneOrder
     public partial class AllMedicinesForm : Form
     {
 
-        string ordb = "Data Source =orcl ; User Id=HR; Password=hr";
+        string ordb = "Data Source =orcl ; User Id=scott; Password=tiger";
         OracleConnection conn;
         public AllMedicinesForm()
         {

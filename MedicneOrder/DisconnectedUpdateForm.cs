@@ -16,6 +16,7 @@ namespace MedicneOrder
 {
     public partial class DisconnectedUpdateForm : Form
     {
+        String ordb = "Data Source =ORCL ; User Id=scott; Password=tiger";
         OracleConnection conn;
         OracleDataAdapter adapter;
         DataSet dataset;
@@ -24,7 +25,8 @@ namespace MedicneOrder
         public DisconnectedUpdateForm()
         {
             InitializeComponent();
-            conn = DBConnection.GetConnection(); // Use the shared DB connection
+            conn = new OracleConnection(ordb);
+            conn.Open(); // Use the shared DB connection
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
