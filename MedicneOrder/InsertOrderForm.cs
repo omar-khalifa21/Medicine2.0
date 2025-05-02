@@ -35,6 +35,7 @@ namespace MedicneOrder
             c.CommandType = CommandType.Text;
             c.Parameters.Add("ordername", textBox1.Text);
             c.Parameters.Add("id", textBox2.Text);
+
         }
     }
 }
