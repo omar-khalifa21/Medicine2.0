@@ -59,12 +59,14 @@ namespace MedicneOrder
                     switch (userType)
                     {
                         case "Customer":
-                            User user = new User(userId); //3shan el userid
+                            Mainform user = new Mainform(userId); //3shan el userid
                             user.Show();
                             this.Hide(); // Hide the login form//ya rab yshta8al
                             break;
                         case "Pharmacist":
-                            // logic form bta3 pharm
+                            Pharm pharm = new Pharm();
+                            pharm.Show();
+                            this.Hide();
                             break;
                         case "Admin":
                             AdminUserManagementForm adminUserManagementForm = new AdminUserManagementForm();

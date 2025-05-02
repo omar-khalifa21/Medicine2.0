@@ -80,6 +80,12 @@
     <Compile Include="InsertOrderForm.Designer.cs">
       <DependentUpon>InsertOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pharm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pharm.Designer.cs">
+      <DependentUpon>Pharm.cs</DependentUpon>
+    </Compile>
     <Compile Include="signup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,12 +97,6 @@
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MedicineDetailsForm.cs">
       <SubType>Form</SubType>
@@ -130,17 +130,11 @@
     <Compile Include="SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="Mainform.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User.Designer.cs">
-      <DependentUpon>User.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewOrderHistoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewOrderHistoryForm.Designer.cs">
-      <DependentUpon>ViewOrderHistoryForm.cs</DependentUpon>
+    <Compile Include="Mainform.Designer.cs">
+      <DependentUpon>Mainform.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AdminUserManagementForm.resx">
       <DependentUpon>AdminUserManagementForm.cs</DependentUpon>
@@ -157,6 +151,9 @@
     <EmbeddedResource Include="MedicineDetailsForm.resx">
       <DependentUpon>MedicineDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pharm.resx">
+      <DependentUpon>Pharm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrescriptionUploadForm.resx">
       <DependentUpon>PrescriptionUploadForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,9 +169,6 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -184,8 +178,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="User.resx">
-      <DependentUpon>User.cs</DependentUpon>
+    <EmbeddedResource Include="Mainform.resx">
+      <DependentUpon>Mainform.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
