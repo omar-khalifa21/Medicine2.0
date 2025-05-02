@@ -59,7 +59,7 @@ namespace MedicneOrder
                     switch (userType)
                     {
                         case "Customer":
-                            Mainform user = new Mainform(userId); //3shan el userid
+                            User user = new User(); //3shan el userid
                             user.Show();
                             this.Hide(); // Hide the login form//ya rab yshta8al
                             break;

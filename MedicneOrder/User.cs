@@ -12,12 +12,12 @@ using Oracle.DataAccess.Types;
     
 namespace MedicneOrder
 {
-    public partial class Mainform : Form
+    public partial class User : Form
     {
         private int userId=1;
         private string ordb = "Data Source=ORCL;User Id=scott;Password=tiger";
         private OracleConnection conn;
-        public Mainform()
+        public User()
         {
             InitializeComponent();
             this.userId = userId;
@@ -25,7 +25,7 @@ namespace MedicneOrder
             LoadAllData();
         }
         //3shan na5od user id 3altool
-        public Mainform(int userId)
+        public User(int userId)
         {
             this.userId = userId;
         }

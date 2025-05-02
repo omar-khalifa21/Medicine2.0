@@ -89,5 +89,10 @@ namespace MedicneOrder
                 MessageBox.Show("Error updating status: " + ex.Message);
             }
         }
+
+        private void PrescriptionVerificationForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

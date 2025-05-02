@@ -92,5 +92,10 @@ namespace MedicneOrder
             txtMedicineName.Clear();
             txtDosage.Clear();
         }
+
+        private void PrescriptionUploadForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

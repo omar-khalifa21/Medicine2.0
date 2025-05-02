@@ -99,5 +99,10 @@ namespace MedicneOrder
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        private void DisconnectedUpdateForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

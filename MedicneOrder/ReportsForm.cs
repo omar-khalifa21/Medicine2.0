@@ -16,5 +16,10 @@ namespace MedicneOrder
         {
             InitializeComponent();
         }
+
+        private void ReportsForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

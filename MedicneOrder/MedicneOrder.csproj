@@ -130,11 +130,11 @@
     <Compile Include="SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Mainform.cs">
+    <Compile Include="User.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Mainform.Designer.cs">
-      <DependentUpon>Mainform.cs</DependentUpon>
+    <Compile Include="User.Designer.cs">
+      <DependentUpon>User.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AdminUserManagementForm.resx">
       <DependentUpon>AdminUserManagementForm.cs</DependentUpon>
@@ -144,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DisconnectedSelectedForm.resx">
       <DependentUpon>DisconnectedSelectedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisconnectedUpdateForm.resx">
+      <DependentUpon>DisconnectedUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InsertOrderForm.resx">
       <DependentUpon>InsertOrderForm.cs</DependentUpon>
@@ -159,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrescriptionVerficationForm.resx">
       <DependentUpon>PrescriptionVerficationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsForm.resx">
+      <DependentUpon>ReportsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
@@ -178,8 +184,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Mainform.resx">
-      <DependentUpon>Mainform.cs</DependentUpon>
+    <EmbeddedResource Include="User.resx">
+      <DependentUpon>User.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
